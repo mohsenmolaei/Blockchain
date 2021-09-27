@@ -13,45 +13,6 @@ from sklearn.preprocessing import MinMaxScaler
 import seaborn as sb
 
 #%%
-# data= pd.read_csv("data/currency_statistics/market-price")
-# start=end=Sum=0
-# tempDate = data['timestamp'][0][0:11]
-# X= np.array([])
-# for ts in range(data.shape[0]):
-#     if tempDate == data['timestamp'][ts][0:11]:
-#         end= ts
-#         Sum+= data['value'][ts]
-#     else:
-#         X = np.append(X, Sum/(end - start + 1))
-#         start= end= ts
-#         tempDate= data['timestamp'][ts][0:11]
-#         Sum= data['value'][ts]
-# X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
-# scaler = MinMaxScaler()
-# scaler.fit(X)
-# X_scaled = scaler.transform(X)
-# price = X_scaled.reshape(1,-1)[0]
-
-# data= pd.read_csv("data/currency_statistics/market-price")
-# start=end=Sum=0
-# tempDate = data['timestamp'][0][0:11]
-# X= np.array([])
-# for ts in range(data.shape[0]):
-#     if tempDate == data['timestamp'][ts][0:11]:
-#         end= ts
-#         Sum+= data['value'][ts]
-#     else:
-#         X = np.append(X, Sum/(end - start + 1))
-#         start= end= ts
-#         tempDate= data['timestamp'][ts][0:11]
-#         Sum= data['value'][ts]
-# X = np.array(X).reshape(-1,1)
-# scaler = MinMaxScaler()
-# scaler.fit(X)
-# X_scaled = scaler.transform(X)
-# wallet_activity = X_scaled.reshape(1,-1)[0]
-
-#%%
 #Get data(currency_statistics)
 data= pd.read_csv("data/currency_statistics/market-price")
 start=end=Sum=0
@@ -66,6 +27,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_price=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -76,6 +38,7 @@ data= pd.read_csv("data/wallet_activity/my-wallet-n-users")
 start=end=Sum=0
 tempDate = data['timestamp'][0][0:11]
 X= np.array([])
+print(X)
 for ts in range(data.shape[0]):
     if tempDate == data['timestamp'][ts][0:11]:
         end= ts
@@ -85,6 +48,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_TW=X
 X = np.array(X).reshape(-1,1) #1:1460:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -142,6 +106,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_TB = X
 X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -225,6 +190,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_BS=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -244,6 +210,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_MCT=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -301,6 +268,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_TNT=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -366,6 +334,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_MVRV=X
 X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -468,6 +437,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_dif=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -487,6 +457,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_HR=X
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -698,6 +669,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_memsize=X
 X = np.array(X).reshape(-1,1) #24:1510:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -831,6 +803,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+csv_utxo=X
 X = np.array(X).reshape(-1,1) #12:1480:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
@@ -853,7 +826,7 @@ plt.show()
 #2
 plt.figure(figsize=(30,15))
 plt.plot(range(price.shape[0]), price  , color='#000080', label='Price',marker='.' )
-plt.plot(range(estimated_transaction_volume.shape[0]), estimated_transaction_volume  , color='#000000', label='estimated_transaction_volume')
+plt.plot(range(estimated_transaction_volume.shape[0]), estimated_transaction_volume  , color='#000000', label='estimated_transaction_volue')
 plt.plot(range(n_payments.shape[0]), n_payments  , color='#FF00FF', label='n_payments')
 plt.plot(range(n_transactions.shape[0]), n_transactions  , color='#008000', label='n_transactions')
 plt.xlabel('Steps (2020/09/20 - 2021/09/21)', fontsize=14)
@@ -867,7 +840,7 @@ plt.figure(figsize=(30,15))
 plt.plot(range(price.shape[0]), price  , color='#000080', label='Price',marker='.' )
 plt.plot(range(n_unique_addresses.shape[0]), n_unique_addresses  , color='#00FFFF', label='n_unique_addresses')
 plt.plot(range(output_volume.shape[0]), output_volume  , color='#FF00FF', label='output_volume')
-plt.plot(range(utxo_count.shape[0]), utxo_count  , color='#00FF00', label='TNO valid unspent trx outputs')
+plt.plot(range(utxo_count.shape[0]), utxo_count  , color='#00FF00', label='Unspent Transaction Outputs(UTXO)')
 plt.xlabel('Steps (2020/09/20 - 2021/09/21)', fontsize=14)
 plt.ylabel('Normalized Value', fontsize=14)
 plt.title("Network Activity(3)")
@@ -888,18 +861,23 @@ plt.grid()
 plt.show()
 
 #Correlation (network_activity)
-X=pd.concat([pd.DataFrame(mempool_size), pd.DataFrame(mempool_count), pd.DataFrame(mempool_growth), pd.DataFrame(estimated_transaction_volume), pd.DataFrame(n_payments), pd.DataFrame(n_transactions), pd.DataFrame(n_unique_addresses), pd.DataFrame(output_volume), pd.DataFrame(utxo_count), pd.DataFrame(estimated_transaction_volume_usd), pd.DataFrame(n_transactions_excluding_popular), pd.DataFrame(transactions_per_second)],axis=1)
+X=pd.concat([pd.DataFrame(mempool_size), pd.DataFrame(mempool_count),pd.DataFrame(mempool_growth), pd.DataFrame(estimated_transaction_volume), pd.DataFrame(n_payments), pd.DataFrame(n_transactions), pd.DataFrame(n_unique_addresses), pd.DataFrame(output_volume), pd.DataFrame(utxo_count), pd.DataFrame(estimated_transaction_volume_usd), pd.DataFrame(n_transactions_excluding_popular), pd.DataFrame(transactions_per_second)],axis=1)
 Y= pd.DataFrame(price)
 df=pd.DataFrame(data=X)
-df.columns =['mempool_size','mempool_count','mempool_growth','estimated_transaction_volume','n_payments','n_transactions','n_unique_addresses','output_volume','TNO valid unspent trx outputs','estimated_transaction_volume_usd','n_transactions_excluding_popular','transactions_per_second',]
+df.columns =['mempool_size','mempool_count','mempool_growth','estimated_transaction_volue','n_payments','n_transactions','n_unique_addresses','output_volume','Unspent Transaction Outputs(UTXO)','estimated_transaction_volume_usd','n_transactions_excluding_popular','transactions_per_second',]
 df['Price']=Y
 plt.figure(figsize=(20,15))
 ttl=sb.heatmap(df.corr(),annot=True)
 ttl.set_title("Network Activity", fontsize=20, fontweight="bold")
 
+#%%
+#save Best Features to CSV file
+from numpy import savetxt
+X=np.array([])
+X=pd.concat([pd.DataFrame(csv_price),pd.DataFrame(csv_dif), pd.DataFrame(csv_utxo), pd.DataFrame(csv_TW), pd.DataFrame(csv_TNT), pd.DataFrame(csv_BS), pd.DataFrame(csv_TB), pd.DataFrame(csv_HR), pd.DataFrame(csv_MVRV), pd.DataFrame(csv_MCT), pd.DataFrame(csv_memsize), ],axis=1)
+df=pd.DataFrame(data=X)
+df.columns =['price','difficulty', 'utxo', 'wallet', 'total_transaction', 'block_size', 'total_btc', 'hash_rate', 'MVRV', 'median_confirmation_time', 'mempool_size', ]
 
+df.to_csv('data/top_features.csv' ,sep=',' ,index=True)
 
-
-
-
-
+# savetxt('data/top_features.csv', df, delimiter=',')
