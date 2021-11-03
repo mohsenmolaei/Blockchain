@@ -56,7 +56,7 @@ class DataProcessing:
         self.Y_test = np.array(self.output_test)
 #%%
 
-feature_name='price' ##########################
+feature_name='utxo' ##########################
 seq=10
 #get data
 df = pd.read_csv("top_features.csv",index_col=None)
@@ -69,7 +69,7 @@ X_scaled = scaler_test.transform(X)
 price = X_scaled.reshape(1,-1)[0]
 #diff
 
-# X2 = np.diff(np.array(df[feature_name])).reshape(-1,1) 
+# X2 = np.diff(np.log(np.array(df[feature_name]))).reshape(-1,1) 
 X2 = np.array(df[feature_name]).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X2)
@@ -91,35 +91,15 @@ Y_train = process.Y_train
 
 X_test = process.X_test.reshape(process.X_test.shape[0],seq,1)
 Y_test = process.Y_test
-#%%
-
-#Initialize the RNN
-# model = Sequential() ;model.add(LSTM(units = 20, activation = 'relu', return_sequences = True, input_shape = (seq, 1)))
-# # '''model.add(Dropout(0.1))''' ;model.add(LSTM(units = 64, activation = 'relu', return_sequences = True))
-# # model.add(Dropout(0.2)) ;model.add(LSTM(units = 120, activation = 'relu', return_sequences = True))
-
-# '''model.add(Dropout(0.3))''' ;model.add(LSTM(units = 20, activation = 'relu'))
-# '''model.add(Dropout(0.4))''' ;model.add(Dense(units =1))
-# model.summary()
 
 #%%
 np.random.seed(1234)
 tf.random.set_seed(1234)
 
 regressor = Sequential()
-# LSTM layer 1
+# LSTM layer 
 regressor.add(LSTM(units = 32, activation = 'relu', return_sequences = True, input_shape = (seq, 1)))
-# regressor.add(Dropout(0.2))
-# LSTM layer 2,3,4
-# regressor.add(LSTM(units = 32, activation = 'relu', return_sequences=True))
-# regressor.add(Dropout(0.2))
-# regressor.add(LSTM(units = 32, activation = 'relu', return_sequences=True))
-# regressor.add(Dropout(0.3))
-# regressor.add(LSTM(units = 32, activation = 'relu', return_sequences=True))
-# regressor.add(Dropout(0.3))
-# LSTM layer 5
 regressor.add(LSTM(units = 32, activation = 'relu'))
-# regressor.add(Dropout(0.2))
 # Fully connected layer
 regressor.add(Dense(units = 1))
 regressor.summary()
@@ -127,13 +107,9 @@ regressor.summary()
 # Compiling the RNN
 regressor.compile(optimizers.Adam(learning_rate=1e-3), loss = 'mean_squared_error')
 #Fitting the RNN model
-history= regressor.fit(X_train, Y_train, epochs = 128, batch_size=16, validation_split=0.15, shuffle=True )
+history= regressor.fit(X_train, Y_train, epochs = 150, batch_size=16, validation_split=0.15, shuffle=True )
 
 #%%
-
-# model.compile(optimizers.Adam(learning_rate=1e-3), loss = 'mean_squared_error')
-# history= model.fit(X_train, Y_train, epochs = 120, batch_size=50, validation_split=0.15, shuffle=True )
-
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 epochs = range(len(loss))
@@ -144,7 +120,6 @@ plt.title("Training and Validation Loss")
 plt.legend()
 plt.show()
 #%%
-
 Y_pred  = regressor.predict(X_test)
 # scale= 1/scaler_test.scale_
 Y_test2 = scaler_test.inverse_transform(Y_test)
