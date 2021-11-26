@@ -25,7 +25,7 @@ for ts in range(data.shape[0]):
         Sum= data['value'][ts]
 csv_price=X
 
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -47,7 +47,7 @@ for ts in range(data.shape[0]):
         Sum= data['value'][ts]
 csv_TW=X
 
-X = np.diff(np.log(np.array(X))).reshape(-1,1) #1:1460:4]['value']).reshape(-1,1)
+X = np.diff(np.log(np.array(X))).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -68,7 +68,7 @@ for ts in range(data.shape[0]):
         Sum= data['value'][ts]
 volumeX=X
 
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -88,7 +88,7 @@ trade_volume = X_scaled.reshape(1,-1)[0]
 #         tempDate= data['timestamp'][ts][0:11]
 #         Sum= data['value'][ts]
 # markcap=X
-# X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
+# X = np.log(np.array(X)).reshape(-1,1) 
 # scaler = MinMaxScaler()
 # scaler.fit(X)
 # X_scaled = scaler.transform(X)
@@ -108,7 +108,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_TB = X
-X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
+X = np.diff(np.log(np.array(X))).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -153,7 +153,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -172,7 +172,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -192,7 +192,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_BS=X
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.diff(np.log(np.array(X))).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -212,7 +212,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_MCT=X
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -231,7 +231,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -250,7 +250,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -270,7 +270,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_TNT=X
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.diff(np.log(np.array(X))).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -336,7 +336,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_MVRV=X
-X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -355,7 +355,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -400,7 +400,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -419,7 +419,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -439,7 +439,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_dif=X
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -459,7 +459,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_HR=X
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -478,7 +478,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -497,7 +497,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -516,7 +516,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -535,7 +535,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -594,7 +594,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -613,7 +613,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -632,7 +632,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #24:1510:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -651,7 +651,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #24:1510:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -671,7 +671,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_memsize=X
-X = np.array(X).reshape(-1,1) #24:1510:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -690,7 +690,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -709,7 +709,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -728,7 +728,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -747,7 +747,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -766,7 +766,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -785,7 +785,7 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
-X = np.array(X).reshape(-1,1) #24:1510:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -805,7 +805,7 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_utxo=X
-X = np.array(X).reshape(-1,1) #12:1480:4]['value']).reshape(-1,1)
+X = np.log(np.array(X)).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
