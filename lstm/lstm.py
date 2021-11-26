@@ -56,7 +56,7 @@ class DataProcessing:
         self.Y_test = np.array(self.output_test)
 #%%
 
-feature_name='utxo' ##########################
+feature_name='price' ##########################
 seq=10
 #get data
 df = pd.read_csv("top_features.csv",index_col=None)
@@ -69,8 +69,8 @@ X_scaled = scaler_test.transform(X)
 price = X_scaled.reshape(1,-1)[0]
 #diff
 
-# X2 = np.diff(np.log(np.array(df[feature_name]))).reshape(-1,1) 
-X2 = np.array(df[feature_name]).reshape(-1,1) 
+X2 = np.diff(np.log(np.array(df[feature_name]))).reshape(-1,1) 
+# X2 = np.array(df[feature_name]).reshape(-1,1) 
 scaler = MinMaxScaler()
 scaler.fit(X2)
 X_scaled = scaler.transform(X2)

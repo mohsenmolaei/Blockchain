@@ -46,7 +46,8 @@ for ts in range(data.shape[0]):
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
 csv_TW=X
-X = np.array(X).reshape(-1,1) #1:1460:4]['value']).reshape(-1,1)
+
+X = np.diff(np.log(np.array(X))).reshape(-1,1) #1:1460:4]['value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
@@ -65,31 +66,33 @@ for ts in range(data.shape[0]):
         start= end= ts
         tempDate= data['timestamp'][ts][0:11]
         Sum= data['value'][ts]
+volumeX=X
+
 X = np.array(X).reshape(-1,1) #'value']).reshape(-1,1)
 scaler = MinMaxScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
 trade_volume = X_scaled.reshape(1,-1)[0]
 
-data= pd.read_csv("data/currency_statistics/market-cap")
-start=end=Sum=0
-tempDate = data['timestamp'][0][0:11]
-X= np.array([])
-for ts in range(data.shape[0]):
-    if tempDate == data['timestamp'][ts][0:11]:
-        end= ts
-        Sum+= data['value'][ts]
-    else:
-        X = np.append(X, Sum/(end - start + 1))
-        start= end= ts
-        tempDate= data['timestamp'][ts][0:11]
-        Sum= data['value'][ts]
-markcap=X
-X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
-scaler = MinMaxScaler()
-scaler.fit(X)
-X_scaled = scaler.transform(X)
-market_cap = X_scaled.reshape(1,-1)[0]
+# data= pd.read_csv("data/currency_statistics/market-cap")
+# start=end=Sum=0
+# tempDate = data['timestamp'][0][0:11]
+# X= np.array([])
+# for ts in range(data.shape[0]):
+#     if tempDate == data['timestamp'][ts][0:11]:
+#         end= ts
+#         Sum+= data['value'][ts]
+#     else:
+#         X = np.append(X, Sum/(end - start + 1))
+#         start= end= ts
+#         tempDate= data['timestamp'][ts][0:11]
+#         Sum= data['value'][ts]
+# markcap=X
+# X = np.array(X).reshape(-1,1) #14:1478:4]['value']).reshape(-1,1)
+# scaler = MinMaxScaler()
+# scaler.fit(X)
+# X_scaled = scaler.transform(X)
+# market_cap = X_scaled.reshape(1,-1)[0]
 
 data= pd.read_csv("data/currency_statistics/total-bitcoins")
 start=end=Sum=0
@@ -115,7 +118,7 @@ total_bitcoins = X_scaled.reshape(1,-1)[0]
 plt.figure(figsize=(20,10))
 plt.plot(range(price.shape[0]), price  , color='#000080', label='Price', marker='.')
 plt.plot(range(trade_volume.shape[0]), trade_volume  , color='#FF0000', label='Trade volume')
-plt.plot(range(market_cap.shape[0]), market_cap     , color='#008000', label='Market cap')
+# plt.plot(range(market_cap.shape[0]), market_cap     , color='#008000', label='Market cap')
 plt.plot(range(total_bitcoins.shape[0]), total_bitcoins, color='#FFFF00', label='Total bitcoins')
 plt.plot(range(wallet_activity.shape[0]), wallet_activity, color='#66FF44', label='Wallet Activity (blockchain.com')
 plt.xlabel('Steps (2020/09/20 - 2021/09/21)', fontsize=14)
@@ -125,11 +128,11 @@ plt.legend()
 plt.grid()
 plt.show()
 
-#Correlation (currency_statistics)
-X=pd.concat([pd.DataFrame(trade_volume), pd.DataFrame(market_cap),  pd.DataFrame(total_bitcoins),  pd.DataFrame(wallet_activity)],axis=1)
+#Correlation (currency_statistics)              #pd.DataFrame(market_cap)
+X=pd.concat([pd.DataFrame(trade_volume),   pd.DataFrame(total_bitcoins),  pd.DataFrame(wallet_activity)],axis=1)
 Y= pd.DataFrame(price)
 df=pd.DataFrame(data=X)
-df.columns =['trade_volume', 'market_cap', 'total_bitcoins','Wallet Activity']
+df.columns =['trade_volume', 'total_bitcoins','Wallet Activity']
 df['Price']=Y
 plt.figure(figsize=(15,8))
 ttl=sb.heatmap(df.corr(),annot=True)
@@ -871,11 +874,12 @@ ttl.set_title("Network Activity", fontsize=20, fontweight="bold")
 #%%
 #save Best Features to CSV file
 # from numpy import savetxt
-X=np.array([])
-X=pd.concat([ pd.DataFrame(tstmp),pd.DataFrame(csv_price),pd.DataFrame(csv_dif), pd.DataFrame(csv_utxo), pd.DataFrame(csv_TW), pd.DataFrame(csv_TNT), pd.DataFrame(csv_BS), pd.DataFrame(csv_TB), pd.DataFrame(csv_HR), pd.DataFrame(csv_MVRV), pd.DataFrame(csv_MCT), pd.DataFrame(csv_memsize),pd.DataFrame(markcap)],axis=1)
-df=pd.DataFrame(data=X)
-df.columns =['timeStamp','price','difficulty', 'utxo', 'wallet', 'total_transaction', 'block_size', 'total_btc', 'hash_rate', 'MVRV', 'median_confirmation_time', 'mempool_size','market_cap' ]
 
-df.to_csv('data/top_features.csv' ,sep=',' ,index=True)
+# X=np.array([])
+# X=pd.concat([ pd.DataFrame(tstmp),pd.DataFrame(csv_price),pd.DataFrame(csv_dif), pd.DataFrame(csv_utxo), pd.DataFrame(csv_TW), pd.DataFrame(csv_TNT), pd.DataFrame(csv_BS), pd.DataFrame(csv_TB), pd.DataFrame(csv_HR), pd.DataFrame(csv_MVRV), pd.DataFrame(csv_MCT), pd.DataFrame(csv_memsize),pd.DataFrame(volumeX)],axis=1)
+# df=pd.DataFrame(data=X)
+# df.columns =['timeStamp','price','difficulty', 'utxo', 'wallet', 'total_transaction', 'block_size', 'total_btc', 'hash_rate', 'MVRV', 'median_confirmation_time', 'mempool_size','volume' ]
+
+# df.to_csv('data/top_features.csv' ,sep=',' ,index=True)
 
 # # savetxt('data/top_features.csv', df, delimiter=',')
